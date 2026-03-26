@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TATA IPL - Match Analysis</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/layout.css">
+  <link rel="stylesheet" href="src/css/components.css">
+  <link rel="stylesheet" href="src/css/utilities.css">
+  <link rel="stylesheet" href="src/css/themes.css">
+  <link rel="stylesheet" href="src/css/responsive.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+
+  <div class="dashboard-shell" id="app-shell">
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">trophy</span>
+        </div>
+        <span class="brand-name">TATA IPL 2025</span>
+      </div>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Main Menu</span>
+        <ul class="nav-list">
+          <li>
+            <a href="index.html" class="nav-item">
+              <span class="material-symbols-outlined">dashboard</span>
+              <span class="nav-label">Live Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="schedule.html" class="nav-item">
+              <span class="material-symbols-outlined">calendar_today</span>
+              <span class="nav-label">Schedule</span>
+            </a>
+          </li>
+          <li>
+            <a href="teams.html" class="nav-item">
+              <span class="material-symbols-outlined">groups</span>
+              <span class="nav-label">Teams</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Analysis</span>
+        <ul class="nav-list">
+          <li>
+            <a href="player-profile.html" class="nav-item">
+              <span class="material-symbols-outlined">person</span>
+              <span class="nav-label">Player Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="match-analysis.html" class="nav-item active">
+              <span class="material-symbols-outlined">monitoring</span>
+              <span class="nav-label">Match Analysis</span>
+            </a>
+          </li>
+          <li>
+            <a href="team-comparison.html" class="nav-item">
+              <span class="material-symbols-outlined">compare_arrows</span>
+              <span class="nav-label">Team Comparison</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Tournament</span>
+        <ul class="nav-list">
+          <li>
+            <a href="standings.html" class="nav-item">
+              <span class="material-symbols-outlined">format_list_numbered</span>
+              <span class="nav-label">Standings</span>
+            </a>
+          </li>
+          <li>
+            <a href="records.html" class="nav-item">
+              <span class="material-symbols-outlined">military_tech</span>
+              <span class="nav-label">Records</span>
+            </a>
+          </li>
+          <li>
+            <a href="venues.html" class="nav-item">
+              <span class="material-symbols-outlined">stadium</span>
+              <span class="nav-label">Venues</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-card">
+          <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User" class="avatar avatar-sm">
+          <div class="user-info">
+            <span class="user-name">Rajeev Ranjan</span>
+            <span class="user-role">Lead Analyst</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="mobile-menu-btn" class="btn-icon hidden-desktop" aria-label="Open navigation menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <button id="sidebar-collapse-btn" class="btn-icon hidden-mobile" aria-label="Toggle sidebar">
+            <span class="material-symbols-outlined">menu_open</span>
+          </button>
+          <h1 style="font-size: var(--text-lg); font-weight: 600;">Match Analysis</h1>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-search">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" placeholder="Search player or team..." aria-label="Search players or teams">
+          </div>
+          <button class="btn-icon theme-toggle" aria-label="Toggle dark mode">
+            <span class="material-symbols-outlined icon-sun" style="display: none;">light_mode</span>
+            <span class="material-symbols-outlined icon-moon">dark_mode</span>
+          </button>
+          <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Profile" class="avatar avatar-sm">
+        </div>
+      </header>
+
+      <main class="content-area" id="main-content">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-4 fade-in stagger-1">
+          <div>
+            <span class="text-muted text-sm uppercase">Match Narrative</span>
+            <h2 class="text-kpi mt-1" style="font-size: 1.8rem;" id="match-narrative">Loading match status...</h2>
+          </div>
+          <div>
+            <select id="match-selector" style="padding: 8px 14px; border-radius: var(--radius-sm); border: 1px solid var(--outline); background: var(--surface-container); color: var(--on-surface); font-weight: 600; font-size: 0.85rem;">
+              <option value="live">Live: Current Match</option>
+              <option value="last">Recent: RCB vs CSK</option>
+              <option value="m65">Recent: SRH vs MI</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Dynamic Scoreboard Hero -->
+        <section class="card-glass mb-4 p-0 fade-in stagger-2" style="overflow: hidden; padding: 0;">
+          <div class="flex justify-between items-center p-6" id="scoreboard-hero" style="background: var(--surface-container-low); padding: var(--space-5); border-bottom: 1px solid var(--outline); min-height: 100px;">
+             <div class="skeleton skeleton-card" style="width: 100%; height: 50px;"></div>
+          </div>
+          
+          <!-- Key Stats Row -->
+          <div class="layout-kpi-row" id="match-kpis" style="grid-template-columns: repeat(4, 1fr); padding: var(--space-3); background: var(--surface-container-lowest); gap: var(--space-3);">
+             <div class="stat-card" style="padding: 10px; min-height: auto;"><div class="skeleton" style="height:18px;"></div></div>
+             <div class="stat-card" style="padding: 10px; min-height: auto;"><div class="skeleton" style="height:18px;"></div></div>
+             <div class="stat-card" style="padding: 10px; min-height: auto;"><div class="skeleton" style="height:18px;"></div></div>
+             <div class="stat-card" style="padding: 10px; min-height: auto;"><div class="skeleton" style="height:18px;"></div></div>
+          </div>
+        </section>
+
+        <!-- Charts Grid (Row 1: Worm + Run Rate side by side) -->
+        <div class="page-grid fade-in stagger-3">
+          
+          <!-- Worm Chart -->
+          <div class="col-8">
+            <div class="card-base" style="padding: var(--space-3);">
+              <h3 class="text-card-title" style="margin-bottom: var(--space-2);">Over-by-over Worm Chart</h3>
+              <div id="worm-chart" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <!-- Run Rate Distribution -->
+          <div class="col-4">
+             <div class="card-base" style="padding: var(--space-3);">
+                <h3 class="text-card-title" style="margin-bottom: var(--space-2);">Run Rate Comparison</h3>
+                <div id="rr-comparison-chart" style="width: 100%; min-height: 280px;"></div>
+             </div>
+          </div>
+
+          <!-- Batting Scorecard -->
+          <div class="col-6">
+            <div class="card-base" style="padding: var(--space-3);">
+              <h3 class="text-card-title" style="margin-bottom: var(--space-2);">Batting Performance</h3>
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>Batsman</th><th>R</th><th>B</th><th>4s</th><th>6s</th><th>SR</th></tr>
+                  </thead>
+                  <tbody id="batting-scorecard"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bowling Figures -->
+          <div class="col-6">
+            <div class="card-base" style="padding: var(--space-3);">
+              <h3 class="text-card-title" style="margin-bottom: var(--space-2);">Bowling Figures</h3>
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>Bowler</th><th>O</th><th>M</th><th>R</th><th>W</th><th>Econ</th></tr>
+                  </thead>
+                  <tbody id="bowling-scorecard"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Partnerships -->
+          <div class="col-8">
+            <div class="card-base" style="padding: var(--space-3);">
+              <h3 class="text-card-title" style="margin-bottom: var(--space-2);">Partnership Breakdown</h3>
+              <div id="partnership-chart" style="width: 100%; min-height: 200px;"></div>
+            </div>
+          </div>
+
+          <!-- Match Insights -->
+          <div class="col-4">
+            <div class="card-base" style="padding: var(--space-3);">
+              <h3 class="text-card-title" style="margin-bottom: var(--space-3);">Match Insights</h3>
+              <div id="match-insights" class="flex-col" style="gap: var(--space-2);"></div>
+            </div>
+          </div>
+          
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="src/js/utils.js"></script>
+  <script src="src/js/theme.js"></script>
+  <script src="src/js/data-plugin.js"></script>
+  <script src="src/js/charts.js"></script>
+  <script src="src/js/sidebar.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const api = window.api;
+      const charts = window.charts;
+      const content = document.getElementById('main-content');
+      const scoreboard = document.getElementById('scoreboard-hero');
+      const narrative = document.getElementById('match-narrative');
+
+      async function loadMatch(matchType) {
+        content.setAttribute('aria-busy', 'true');
+        const match = await api.getLiveMatch();
+        const t1 = match.team1;
+        const t2 = match.team2;
+
+        narrative.textContent = match.status;
+
+        // Render Scoreboard
+        scoreboard.innerHTML = `
+          <div class="flex items-center gap-6">
+            <div style="width: 70px; height: 70px; border-radius: 12px; background: white; padding: 5px; box-shadow: var(--shadow-sm);">
+                <img src="${t1.logo}" alt="${t1.short}" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+            <div>
+              <div class="text-kpi" style="font-size: 2.8rem;">${t1.score}</div>
+              <div class="text-muted" style="font-weight:700;">${t1.name} <span style="font-weight:400; font-size:0.8rem;">(${t1.overs})</span></div>
+            </div>
+          </div>
+
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--surface-container-highest); display: grid; place-items: center; font-weight: 800; color: var(--on-surface-variant); font-size: 14px;">VS</div>
+
+          <div class="flex items-center gap-6 text-right">
+            <div>
+              <div class="text-kpi" style="font-size: 2.8rem; color: var(--primary);">${t2.score}</div>
+              <div class="text-muted" style="font-weight:700; color: var(--primary);">${t2.name} <span style="font-weight:400; font-size:0.8rem; color: var(--on-surface-variant);">(${t2.overs})</span></div>
+            </div>
+            <div style="width: 70px; height: 70px; border-radius: 12px; background: white; padding: 5px; box-shadow: var(--shadow-sm);">
+                <img src="${t2.logo}" alt="${t2.short}" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+          </div>
+        `;
+
+        // Render KPIs
+        const kpis = document.getElementById('match-kpis');
+        kpis.innerHTML = `
+           <div class="stat-card" style="padding: 12px; min-height: auto;">
+              <div class="stat-header" style="margin-bottom:4px;"><span class="stat-label" style="font-size:10px;">Highest Score</span></div>
+              <div style="font-weight:800; font-size:1.1rem; color:var(--on-surface);">R. Gaikwad (69)</div>
+           </div>
+           <div class="stat-card" style="padding: 12px; min-height: auto;">
+              <div class="stat-header" style="margin-bottom:4px;"><span class="stat-label" style="font-size:10px;">Most Sixes</span></div>
+              <div style="font-weight:800; font-size:1.1rem; color:var(--primary);">Virat Kohli (4)</div>
+           </div>
+           <div class="stat-card" style="padding: 12px; min-height: auto;">
+              <div class="stat-header" style="margin-bottom:4px;"><span class="stat-label" style="font-size:10px;">Best Economy</span></div>
+              <div style="font-weight:800; font-size:1.1rem; color:var(--on-surface);">J. Bumrah (6.5)</div>
+           </div>
+           <div class="stat-card" style="padding: 12px; min-height: auto;">
+              <div class="stat-header" style="margin-bottom:4px;"><span class="stat-label" style="font-size:10px;">Current RR</span></div>
+              <div style="font-weight:800; font-size:1.1rem; color:var(--primary);">10.32</div>
+           </div>
+        `;
+
+        // Charts
+        const wormData = api.generateWormData();
+        charts.createWormChart("#worm-chart", wormData);
+        
+        const rrData = api.generateRunRateData();
+        charts.createHorizontalBarChart("#rr-comparison-chart", {
+           labels: ["Powerplay", "Middle Overs", "Death Overs"],
+           values: [8.5, 9.2, 12.4]
+        });
+
+        // Scorecards
+        const batsmen = match.batsmen.length ? match.batsmen : [
+            { name: "Virat Kohli", r: 47, b: 29, f4: 3, f6: 4, sr: 162.1 },
+            { name: "Faf du Plessis", r: 35, b: 22, f4: 4, f6: 1, sr: 159.1 },
+            { name: "Rajat Patidar", r: 41, b: 23, f4: 2, f6: 3, sr: 178.2 }
+        ];
+        document.getElementById('batting-scorecard').innerHTML = batsmen.map(b => `
+           <tr>
+              <td><div class="flex items-center gap-2"><span style="width:8px; height:8px; border-radius:50%; background:var(--primary);"></span> ${b.name}</div></td>
+              <td style="font-weight:800;">${b.r || '0'}</td>
+              <td class="text-muted">${b.b || '0'}</td>
+              <td>${b.f4 || '0'}</td>
+              <td>${b.f6 || '0'}</td>
+              <td class="text-primary" style="font-weight:700;">${b.sr || '0.0'}</td>
+           </tr>
+        `).join('');
+
+        const bowlers = [
+            { name: "Jasprit Bumrah", o: 4.0, m: 0, r: 24, w: 2, e: 6.0 },
+            { name: "Sunil Narine", o: 4.0, m: 0, r: 28, w: 1, e: 7.0 },
+            { name: "Rashid Khan", o: 4.0, m: 0, r: 32, w: 1, e: 8.0 }
+        ];
+        document.getElementById('bowling-scorecard').innerHTML = bowlers.map(b => `
+           <tr>
+              <td style="font-weight:600;">${b.name}</td>
+              <td>${b.o}</td>
+              <td class="text-muted">${b.m}</td>
+              <td>${b.r}</td>
+              <td style="font-weight:800; color:var(--primary); font-size:1.1rem;">${b.w}</td>
+              <td class="text-muted">${b.e}</td>
+           </tr>
+        `).join('');
+
+        // Partnership Breakdown Chart
+        if (window.ApexCharts) {
+          const partnershipOptions = {
+            series: [{ name: 'Partnership Runs', data: [42, 38, 67, 28, 15, 22] }],
+            chart: { type: 'bar', height: 200, toolbar: { show: false }, background: 'transparent' },
+            colors: ['#4edea3'],
+            plotOptions: { bar: { horizontal: true, borderRadius: 4, barHeight: '60%' } },
+            dataLabels: { enabled: true, style: { fontSize: '11px', fontWeight: 700, colors: ['#fff'] }, formatter: val => val + ' runs' },
+            xaxis: { categories: ['1st Wkt', '2nd Wkt', '3rd Wkt', '4th Wkt', '5th Wkt', '6th Wkt'], labels: { style: { colors: 'var(--on-surface-variant)', fontSize: '11px' } } },
+            yaxis: { labels: { style: { colors: 'var(--on-surface-variant)', fontSize: '11px' } } },
+            grid: { borderColor: 'rgba(144,144,151,0.08)', xaxis: { lines: { show: true } }, yaxis: { lines: { show: false } } },
+            tooltip: { theme: 'dark' },
+            theme: { mode: 'dark' }
+          };
+          new ApexCharts(document.querySelector("#partnership-chart"), partnershipOptions).render();
+        }
+
+        // Match Insights
+        const insightsContainer = document.getElementById('match-insights');
+        const insights = [
+          { icon: 'speed', label: 'Req. Run Rate', value: '9.87', color: 'var(--signal-warning)' },
+          { icon: 'wifi_tethering', label: 'Dot Ball %', value: '32.5%', color: 'var(--signal-negative)' },
+          { icon: 'trending_up', label: 'Boundary %', value: '58.3%', color: 'var(--primary)' },
+          { icon: 'sports_cricket', label: 'Extras', value: '14', color: 'var(--signal-info)' },
+          { icon: 'swap_vert', label: 'Last 5 Overs RR', value: '11.4', color: 'var(--primary)' },
+          { icon: 'military_tech', label: 'Powerplay Score', value: '62/1', color: 'var(--signal-positive)' }
+        ];
+        insightsContainer.innerHTML = insights.map(i => `
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface-container);border-radius:var(--radius-md);border:1px solid var(--outline-variant);">
+            <span class="material-symbols-outlined" style="color:${i.color};font-size:18px;">${i.icon}</span>
+            <div style="flex:1;">
+              <div class="text-muted" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">${i.label}</div>
+              <div style="font-weight:800;font-size:1rem;color:var(--on-surface);">${i.value}</div>
+            </div>
+          </div>
+        `).join('');
+
+        content.setAttribute('aria-busy', 'false');
+      }
+
+      await loadMatch("live");
+      window.renderCharts = () => loadMatch("live");
+
+      document.getElementById('match-selector').addEventListener('change', () => loadMatch("live"));
+    });
+  </script>
+</body>
+</html>

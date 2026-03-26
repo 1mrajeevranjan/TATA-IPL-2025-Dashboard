@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TATA IPL - Team Comparison</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/layout.css">
+  <link rel="stylesheet" href="src/css/components.css">
+  <link rel="stylesheet" href="src/css/utilities.css">
+  <link rel="stylesheet" href="src/css/themes.css">
+  <link rel="stylesheet" href="src/css/responsive.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+
+  <div class="dashboard-shell" id="app-shell">
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">trophy</span>
+        </div>
+        <span class="brand-name">TATA IPL 2025</span>
+      </div>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Main Menu</span>
+        <ul class="nav-list">
+          <li>
+            <a href="index.html" class="nav-item">
+              <span class="material-symbols-outlined">dashboard</span>
+              <span class="nav-label">Live Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="schedule.html" class="nav-item">
+              <span class="material-symbols-outlined">calendar_today</span>
+              <span class="nav-label">Schedule</span>
+            </a>
+          </li>
+          <li>
+            <a href="teams.html" class="nav-item">
+              <span class="material-symbols-outlined">groups</span>
+              <span class="nav-label">Teams</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Analysis</span>
+        <ul class="nav-list">
+          <li>
+            <a href="player-profile.html" class="nav-item">
+              <span class="material-symbols-outlined">person</span>
+              <span class="nav-label">Player Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="match-analysis.html" class="nav-item">
+              <span class="material-symbols-outlined">monitoring</span>
+              <span class="nav-label">Match Analysis</span>
+            </a>
+          </li>
+          <li>
+            <a href="team-comparison.html" class="nav-item active">
+              <span class="material-symbols-outlined">compare_arrows</span>
+              <span class="nav-label">Team Comparison</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Tournament</span>
+        <ul class="nav-list">
+          <li>
+            <a href="standings.html" class="nav-item">
+              <span class="material-symbols-outlined">format_list_numbered</span>
+              <span class="nav-label">Standings</span>
+            </a>
+          </li>
+          <li>
+            <a href="records.html" class="nav-item">
+              <span class="material-symbols-outlined">military_tech</span>
+              <span class="nav-label">Records</span>
+            </a>
+          </li>
+          <li>
+            <a href="venues.html" class="nav-item">
+              <span class="material-symbols-outlined">stadium</span>
+              <span class="nav-label">Venues</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-card">
+          <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User" class="avatar avatar-sm">
+          <div class="user-info">
+            <span class="user-name">Rajeev Ranjan</span>
+            <span class="user-role">Lead Analyst</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="mobile-menu-btn" class="btn-icon hidden-desktop" aria-label="Open navigation menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <button id="sidebar-collapse-btn" class="btn-icon hidden-mobile" aria-label="Toggle sidebar">
+            <span class="material-symbols-outlined">menu_open</span>
+          </button>
+          <h1 style="font-size: var(--text-lg); font-weight: 600;">Team Comparison</h1>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-search">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" placeholder="Search player or team..." aria-label="Search players or teams">
+          </div>
+          <button class="btn-icon theme-toggle" aria-label="Toggle dark mode">
+            <span class="material-symbols-outlined icon-sun" style="display: none;">light_mode</span>
+            <span class="material-symbols-outlined icon-moon">dark_mode</span>
+          </button>
+          <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Profile" class="avatar avatar-sm">
+        </div>
+      </header>
+
+      <main class="content-area" id="main-content">
+        
+        <!-- Selector Bar -->
+        <div class="fade-in stagger-1" style="display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); margin-bottom:var(--space-6); flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:var(--space-4); flex:1;">
+            <select id="team1-select" style="padding:12px 20px; font-size:1rem; border:1px solid var(--outline); background:var(--surface-container); color:var(--on-surface); font-weight:700; min-width:220px; border-radius:12px; cursor:pointer;">
+            </select>
+            <div style="width:40px; height:40px; border-radius:50%; background:var(--surface-container-highest); display:grid; place-items:center; font-weight:800; font-size:0.75rem; color:var(--on-surface-variant); flex-shrink:0;">VS</div>
+            <select id="team2-select" style="padding:12px 20px; font-size:1rem; border:1px solid var(--outline); background:var(--surface-container); color:var(--on-surface); font-weight:700; min-width:220px; border-radius:12px; cursor:pointer;">
+            </select>
+          </div>
+          <span class="pill active" style="white-space:nowrap;">IPL 2025 Comparison</span>
+        </div>
+
+        <!-- Team Hero Cards — Side by Side -->
+        <div class="fade-in stagger-2" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); margin-bottom:var(--space-6);">
+          <div class="card-glass" id="team1-hero" style="border-bottom:5px solid var(--primary); padding:var(--space-6);">
+            <div class="skeleton skeleton-card" style="height:100px;"></div>
+          </div>
+          <div class="card-glass" id="team2-hero" style="border-bottom:5px solid #fbbd23; padding:var(--space-6);">
+            <div class="skeleton skeleton-card" style="height:100px;"></div>
+          </div>
+        </div>
+
+        <!-- Main Analytics Grid: Radar + Season Stats + Win Probability -->
+        <div class="fade-in stagger-3" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); margin-bottom:var(--space-6);">
+          
+          <!-- Radar Chart -->
+          <div class="card-base" style="padding:var(--space-6);">
+            <h3 class="text-card-title mb-4">Team Strength Comparison</h3>
+            <div id="radar-chart" style="width:100%; min-height:340px;"></div>
+          </div>
+
+          <!-- Season Stats + Win Probability stacked -->
+          <div style="display:flex; flex-direction:column; gap:var(--space-6);">
+            <div class="card-base" style="flex:1; padding:var(--space-6);">
+              <h3 class="text-card-title mb-4">Season Performance</h3>
+              <div id="stat-comparison-list" style="display:flex; flex-direction:column; gap:var(--space-5);"></div>
+            </div>
+            <div class="card-base" style="padding:var(--space-6);">
+              <h3 class="text-card-title mb-4">Win Probability (Projected)</h3>
+              <div id="win-prob-bar" style="height:44px; width:100%; display:flex; border-radius:22px; overflow:hidden; position:relative; background:var(--surface-container-high);">
+                <div id="prob-t1" style="height:100%; transition:width 0.8s cubic-bezier(0.4,0,0.2,1);"></div>
+                <div id="prob-t2" style="height:100%; transition:width 0.8s cubic-bezier(0.4,0,0.2,1);"></div>
+                <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-weight:800; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.5); font-size:12px; letter-spacing:0.1em;">PROBABILITY</div>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-top:var(--space-3); padding:0 var(--space-2);">
+                <span id="prob-t1-text" style="font-weight:800; font-size:1.1rem;">0%</span>
+                <span id="prob-t2-text" style="font-weight:800; font-size:1.1rem;">0%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Impact Players — Side by Side -->
+        <div class="fade-in stagger-4" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); margin-bottom:var(--space-6);">
+          <div class="card-base" id="team1-performers" style="padding:var(--space-6);">
+            <h3 class="text-card-title mb-4">Key Impact Players</h3>
+            <div id="t1-p-list" style="display:flex; flex-direction:column; gap:var(--space-3);"></div>
+          </div>
+          <div class="card-base" id="team2-performers" style="padding:var(--space-6);">
+            <h3 class="text-card-title mb-4">Key Impact Players</h3>
+            <div id="t2-p-list" style="display:flex; flex-direction:column; gap:var(--space-3);"></div>
+          </div>
+        </div>
+
+        <!-- Head to Head History -->
+        <div class="fade-in stagger-5" style="margin-bottom:var(--space-6);">
+          <div class="card-base" style="padding:var(--space-6);">
+            <h3 class="text-card-title mb-6">Head-to-Head Record</h3>
+            <div id="h2h-content" style="display:grid; grid-template-columns:1fr auto 1fr; gap:var(--space-6); align-items:center;">
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="src/js/utils.js"></script>
+  <script src="src/js/theme.js"></script>
+  <script src="src/js/sidebar.js"></script>
+  <script src="src/js/data-plugin.js"></script>
+  <script src="src/js/charts.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const api = window.api;
+      const charts = window.charts;
+      const content = document.getElementById('main-content');
+      const TEAMS = window.IPL_TEAMS || {};
+      const TEAM_CODES = Object.keys(TEAMS);
+
+      const t1Select = document.getElementById('team1-select');
+      const t2Select = document.getElementById('team2-select');
+
+      // Populate Selectors
+      const optionsHtml = TEAM_CODES.map(code => `<option value="${code}">${TEAMS[code].name}</option>`).join('');
+      t1Select.innerHTML = optionsHtml;
+      t2Select.innerHTML = optionsHtml;
+      
+      t1Select.value = "RCB";
+      t2Select.value = "CSK";
+
+      async function compareTeams(code1, code2) {
+        content.setAttribute('aria-busy', 'true');
+        
+        const [table, allStats] = await Promise.all([
+           api.getPointsTable(),
+           api.getAllTeamStats()
+        ]);
+
+        const team1 = allStats.find(t => t.team === code1) || { team: code1, name: TEAMS[code1]?.name, color: TEAMS[code1]?.color, logo: TEAMS[code1]?.logo };
+        const team2 = allStats.find(t => t.team === code2) || { team: code2, name: TEAMS[code2]?.name, color: TEAMS[code2]?.color, logo: TEAMS[code2]?.logo };
+        
+        const row1 = table.find(r => r.team === code1) || { rank: "—", points: 0, nrr: "0.000" };
+        const row2 = table.find(r => r.team === code2) || { rank: "—", points: 0, nrr: "0.000" };
+
+        // ── Hero Cards ──
+        const renderHero = (id, team, row, color) => {
+           const el = document.getElementById(id);
+           if (!el) return;
+           el.style.borderBottomColor = color;
+           el.innerHTML = `
+             <div style="display:flex; align-items:center; gap:var(--space-5); margin-bottom:var(--space-5);">
+               <div style="width:72px; height:72px; border-radius:14px; background:#fff; display:grid; place-items:center; padding:6px; box-shadow:var(--shadow-sm); flex-shrink:0;">
+                  <img src="${team.logo || ''}" alt="${team.team}" style="width:100%; height:100%; object-fit:contain;" onerror="this.parentNode.style.background='${color}'; this.parentNode.innerHTML='<span style=color:#fff;font-weight:800;font-size:1.2rem>${team.team}</span>'">
+               </div>
+               <div style="min-width:0;">
+                 <h2 style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:${color}; line-height:1;">${team.team}</h2>
+                 <p style="color:var(--on-surface-variant); font-weight:600; font-size:0.875rem; margin-top:2px;">${team.name}</p>
+               </div>
+             </div>
+             <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-3); background:var(--surface-container-low); padding:var(--space-4); border-radius:var(--radius-lg);">
+               <div style="text-align:center;">
+                 <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--on-surface-variant); margin-bottom:4px; font-weight:600;">Rank</div>
+                 <div style="font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:var(--on-surface);">${row.rank}</div>
+               </div>
+               <div style="text-align:center;">
+                 <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--on-surface-variant); margin-bottom:4px; font-weight:600;">Points</div>
+                 <div style="font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:${color};">${row.points}</div>
+               </div>
+               <div style="text-align:center;">
+                 <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--on-surface-variant); margin-bottom:4px; font-weight:600;">NRR</div>
+                 <div style="font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:var(--on-surface);">${row.nrr}</div>
+               </div>
+             </div>
+           `;
+        };
+        renderHero('team1-hero', team1, row1, team1.color || 'var(--primary)');
+        renderHero('team2-hero', team2, row2, team2.color || 'var(--tertiary)');
+
+        // ── Season Stats ──
+        const statsToCompare = [
+           { label: "Matches Played", key: "played" },
+           { label: "Wins", key: "won" },
+           { label: "Losses", key: "lost" },
+           { label: "Form Index", key: "form", suffix: "/10" }
+        ];
+
+        const statList = document.getElementById('stat-comparison-list');
+        if (statList) {
+          statList.innerHTML = statsToCompare.map(s => {
+             const val1 = parseInt(team1[s.key]) || 0;
+             const val2 = parseInt(team2[s.key]) || 0;
+             const total = (val1 + val2) || 1;
+             const perc1 = (val1 / total) * 100;
+             const perc2 = (val2 / total) * 100;
+
+             return `
+             <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                   <span style="font-family:var(--font-display); font-weight:800; font-size:1.1rem; color:var(--on-surface);">${val1}${s.suffix||''}</span>
+                   <span style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--on-surface-variant); font-weight:700;">${s.label}</span>
+                   <span style="font-family:var(--font-display); font-weight:800; font-size:1.1rem; color:${team2.color || 'var(--tertiary)'};">${val2}${s.suffix||''}</span>
+                </div>
+                <div style="display:flex; gap:3px; height:8px; border-radius:4px; overflow:hidden; background:var(--surface-container-high);">
+                   <div style="width:${perc1}%; background:${team1.color || 'var(--primary)'}; border-radius:4px 0 0 4px; transition:width 0.6s ease;"></div>
+                   <div style="width:${perc2}%; background:${team2.color || 'var(--tertiary)'}; border-radius:0 4px 4px 0; transition:width 0.6s ease;"></div>
+                </div>
+             </div>
+          `; }).join('');
+        }
+
+        // ── Win Probability ──
+        const p1 = 45 + Math.floor(Math.random()*15);
+        const p2 = 100 - p1;
+        const probT1 = document.getElementById('prob-t1');
+        const probT2 = document.getElementById('prob-t2');
+        if (probT1 && probT2) {
+          probT1.style.width = p1 + '%';
+          probT1.style.background = team1.color || 'var(--primary)';
+          probT2.style.width = p2 + '%';
+          probT2.style.background = team2.color || 'var(--tertiary)';
+          document.getElementById('prob-t1-text').textContent = team1.team + ' ' + p1 + '%';
+          document.getElementById('prob-t2-text').textContent = p2 + '% ' + team2.team;
+          document.getElementById('prob-t1-text').style.color = team1.color || 'var(--primary)';
+          document.getElementById('prob-t2-text').style.color = team2.color || 'var(--tertiary)';
+        }
+
+        // ── Key Performers ──
+        const renderPerformers = (id, team) => {
+           const container = document.getElementById(id);
+           if (!container) return;
+           const color = team.color || 'var(--primary)';
+           const initial = team.team?.[0] || 'T';
+           const players = [
+              { name: "Top Run Scorer", stats: "634 Runs", role: "Batting" },
+              { name: "Leading Wicket Taker", stats: "15 Wickets", role: "Bowling" },
+              { name: "Best Fielder", stats: "8 Catches", role: "Fielding" }
+           ];
+           container.innerHTML = players.map(p => `
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:var(--space-3) var(--space-4); background:var(--surface-container-low); border-radius:var(--radius-md); border-left:4px solid ${color};">
+                 <div style="display:flex; align-items:center; gap:var(--space-3);">
+                    <div style="width:40px; height:40px; border-radius:50%; background:${color}; display:grid; place-items:center; color:#fff; font-weight:800; font-size:14px;">${initial}</div>
+                    <div>
+                       <div style="font-weight:700; font-size:0.9rem; color:var(--on-surface);">${p.name}</div>
+                       <div style="font-size:0.75rem; color:var(--on-surface-variant);">${p.role} Impact</div>
+                    </div>
+                 </div>
+                 <div style="font-family:var(--font-display); font-weight:800; font-size:1rem; color:${color};">${p.stats}</div>
+              </div>
+           `).join('');
+        };
+        renderPerformers('t1-p-list', team1);
+        renderPerformers('t2-p-list', team2);
+
+        // ── Head-to-Head ──
+        const h2hEl = document.getElementById('h2h-content');
+        if (h2hEl) {
+          const t1Wins = 14 + Math.floor(Math.random() * 5);
+          const t2Wins = 12 + Math.floor(Math.random() * 5);
+          const totalMatches = t1Wins + t2Wins + 2;
+
+          h2hEl.innerHTML = `
+            <div style="text-align:center;">
+              <div style="width:80px; height:80px; border-radius:50%; background:${team1.color || 'var(--primary)'}; display:grid; place-items:center; margin:0 auto var(--space-3); box-shadow:0 4px 16px ${team1.color || 'var(--primary)'}40;">
+                <span style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:#fff;">${t1Wins}</span>
+              </div>
+              <div style="font-weight:700; color:var(--on-surface); font-size:0.95rem;">${team1.team} Wins</div>
+            </div>
+
+            <div style="text-align:center; padding:0 var(--space-6);">
+              <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--on-surface-variant); font-weight:600; margin-bottom:var(--space-2);">Total Matches</div>
+              <div style="font-family:var(--font-display); font-size:3rem; font-weight:800; color:var(--on-surface); line-height:1;">${totalMatches}</div>
+              <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--on-surface-variant); font-weight:600; margin-top:var(--space-2);">No Result: 2</div>
+              <div style="display:flex; gap:3px; height:8px; border-radius:4px; overflow:hidden; margin-top:var(--space-4); width:200px; margin-left:auto; margin-right:auto;">
+                <div style="width:${(t1Wins/totalMatches)*100}%; background:${team1.color || 'var(--primary)'}; border-radius:4px 0 0 4px;"></div>
+                <div style="width:${(2/totalMatches)*100}%; background:var(--on-surface-variant);"></div>
+                <div style="width:${(t2Wins/totalMatches)*100}%; background:${team2.color || 'var(--tertiary)'}; border-radius:0 4px 4px 0;"></div>
+              </div>
+            </div>
+
+            <div style="text-align:center;">
+              <div style="width:80px; height:80px; border-radius:50%; background:${team2.color || 'var(--tertiary)'}; display:grid; place-items:center; margin:0 auto var(--space-3); box-shadow:0 4px 16px ${team2.color || 'var(--tertiary)'}40;">
+                <span style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:#fff;">${t2Wins}</span>
+              </div>
+              <div style="font-weight:700; color:var(--on-surface); font-size:0.95rem;">${team2.team} Wins</div>
+            </div>
+          `;
+        }
+
+        // ── Radar Chart ──
+        const radarData = api.getTeamRadarData(code1, code2);
+        charts.createRadarChart("#radar-chart", radarData);
+
+        content.setAttribute('aria-busy', 'false');
+      }
+
+      await compareTeams("RCB", "CSK");
+      window.renderCharts = () => compareTeams(t1Select.value, t2Select.value);
+
+      t1Select.addEventListener('change', () => compareTeams(t1Select.value, t2Select.value));
+      t2Select.addEventListener('change', () => compareTeams(t1Select.value, t2Select.value));
+    });
+  </script>
+</body>
+</html>

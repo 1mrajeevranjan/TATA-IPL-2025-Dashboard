@@ -1,0 +1,198 @@
+/* ============================================
+   SIDEBAR COMPONENT
+   ============================================ */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-lowest);
+  border-right: 1px solid var(--outline);
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  transition: width var(--transition-base), transform var(--transition-base);
+  z-index: 1000;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Brand Section */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5);
+  margin-bottom: var(--space-2);
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-lg);
+  display: grid;
+  place-items: center;
+  color: var(--on-primary);
+  box-shadow: 0 4px 12px rgba(78, 222, 163, 0.2);
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+/* Nav Groups */
+.nav-group {
+  margin-bottom: var(--space-6);
+  padding: 0 var(--space-3);
+}
+
+.nav-group-title {
+  display: block;
+  font-family: var(--font-data);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+  padding: 0 var(--space-3) var(--space-2);
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px var(--space-4);
+  border-radius: var(--radius-md);
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item:hover {
+  background: var(--surface-container);
+  color: var(--on-surface);
+  transform: translateX(4px);
+}
+
+.nav-item.active {
+  background: var(--primary-container);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  background: var(--primary);
+  border-radius: 0 4px 4px 0;
+}
+
+.nav-item .material-symbols-outlined {
+  font-size: 20px;
+  transition: transform var(--transition-fast);
+}
+
+.nav-item:hover .material-symbols-outlined {
+  transform: scale(1.1);
+}
+
+.nav-label {
+  white-space: nowrap;
+  transition: opacity var(--transition-base);
+}
+
+/* User Profile Card */
+.sidebar-footer {
+  margin-top: auto;
+  padding: var(--space-4) var(--space-3);
+  border-top: 1px solid var(--outline);
+}
+
+.user-profile-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--surface-container);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.user-profile-card:hover {
+  background: var(--surface-container-high);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.user-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--on-surface);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.user-role {
+  font-size: 0.6875rem;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+/* Collapsed State */
+.dashboard-shell.sidebar-collapsed .sidebar {
+  width: var(--sidebar-collapsed-width);
+}
+
+.dashboard-shell.sidebar-collapsed .nav-label,
+.dashboard-shell.sidebar-collapsed .nav-group-title,
+.dashboard-shell.sidebar-collapsed .brand-name,
+.dashboard-shell.sidebar-collapsed .user-info {
+  display: none;
+}
+
+.dashboard-shell.sidebar-collapsed .sidebar-brand {
+  padding: var(--space-6) 0;
+  justify-content: center;
+}
+
+.dashboard-shell.sidebar-collapsed .nav-group {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-shell.sidebar-collapsed .nav-item {
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  padding: 0;
+}

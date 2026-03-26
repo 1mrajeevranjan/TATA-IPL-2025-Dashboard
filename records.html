@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TATA IPL - Records</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/layout.css">
+  <link rel="stylesheet" href="src/css/components.css">
+  <link rel="stylesheet" href="src/css/utilities.css">
+  <link rel="stylesheet" href="src/css/themes.css">
+  <link rel="stylesheet" href="src/css/responsive.css">
+
+  <style>
+    .record-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      padding: var(--space-6);
+      position: relative;
+      overflow: hidden;
+    }
+    .record-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--surface-container-highest);
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+    }
+    .record-meta {
+      flex: 1;
+    }
+    .record-title {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--on-surface);
+      margin-bottom: 4px;
+    }
+    .record-val {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .player-headshot-rec {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      background: var(--surface-container-low);
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-shell" id="app-shell">
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><span class="material-symbols-outlined">trophy</span></div>
+        <span class="brand-name">TATA IPL 2025</span>
+      </div>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Main Menu</span>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-item"><span class="material-symbols-outlined">dashboard</span><span class="nav-label">Live Dashboard</span></a></li>
+          <li><a href="schedule.html" class="nav-item"><span class="material-symbols-outlined">calendar_today</span><span class="nav-label">Schedule</span></a></li>
+          <li><a href="teams.html" class="nav-item"><span class="material-symbols-outlined">groups</span><span class="nav-label">Teams</span></a></li>
+        </ul>
+      </nav>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Analysis</span>
+        <ul class="nav-list">
+          <li><a href="player-profile.html" class="nav-item"><span class="material-symbols-outlined">person</span><span class="nav-label">Player Profile</span></a></li>
+          <li><a href="match-analysis.html" class="nav-item"><span class="material-symbols-outlined">monitoring</span><span class="nav-label">Match Analysis</span></a></li>
+          <li><a href="team-comparison.html" class="nav-item"><span class="material-symbols-outlined">compare_arrows</span><span class="nav-label">Team Comparison</span></a></li>
+        </ul>
+      </nav>
+
+      <nav class="nav-group">
+        <span class="nav-group-title">Tournament</span>
+        <ul class="nav-list">
+          <li><a href="standings.html" class="nav-item"><span class="material-symbols-outlined">format_list_numbered</span><span class="nav-label">Standings</span></a></li>
+          <li><a href="records.html" class="nav-item active"><span class="material-symbols-outlined">military_tech</span><span class="nav-label">Records</span></a></li>
+          <li><a href="venues.html" class="nav-item"><span class="material-symbols-outlined">stadium</span><span class="nav-label">Venues</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-card">
+          <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User" class="avatar avatar-sm">
+          <div class="user-info"><span class="user-name">Rajeev Ranjan</span><span class="user-role">Lead Analyst</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="mobile-menu-btn" class="btn-icon hidden-desktop" aria-label="Open navigation menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <button id="sidebar-collapse-btn" class="btn-icon hidden-mobile" aria-label="Toggle sidebar">
+            <span class="material-symbols-outlined">menu_open</span>
+          </button>
+          <h1 style="font-size: var(--text-lg); font-weight: 600;">Tournament Records</h1>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-search">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" placeholder="Search player or team..." aria-label="Search players or teams">
+          </div>
+          <button class="btn-icon theme-toggle" aria-label="Toggle dark mode">
+            <span class="material-symbols-outlined icon-sun" style="display: none;">light_mode</span>
+            <span class="material-symbols-outlined icon-moon">dark_mode</span>
+          </button>
+          <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Profile" class="avatar avatar-sm">
+        </div>
+      </header>
+
+      <main class="content-area">
+        <div class="section-header fade-in">
+          <div>
+            <h2 class="text-kpi">All-Time Statistics</h2>
+            <p class="text-muted">Legends of the Indian Premier League</p>
+          </div>
+        </div>
+
+        <div class="page-grid mt-8">
+          <div class="col-12 flex-col gap-6">
+            <h3 class="text-card-title fade-in">Batting Hall of Fame</h3>
+            <div id="batting-records" class="flex-col gap-4 fade-in stagger-1"></div>
+
+            <h3 class="text-card-title mt-6 fade-in">Bowling Legends</h3>
+            <div id="bowling-records" class="flex-col gap-4 fade-in stagger-2"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="src/js/theme.js"></script>
+  <script src="src/js/sidebar.js"></script>
+  <script src="src/js/data-plugin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const records = await window.api.getTournamentRecords();
+      renderRecords('batting-records', records.batting);
+      renderRecords('bowling-records', records.bowling);
+    });
+
+    function renderRecords(id, data) {
+      const container = document.getElementById(id);
+      container.innerHTML = '';
+      data.forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'card-base record-card';
+        card.innerHTML = `
+          <img src="${r.img}" alt="${r.name}" class="player-headshot-rec">
+          <div class="record-meta">
+            <div class="record-title">${r.name}</div>
+            <div class="text-muted" style="font-size: 0.9rem;">${r.details}</div>
+          </div>
+          <div class="record-val">${r.record}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

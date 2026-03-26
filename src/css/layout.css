@@ -1,0 +1,142 @@
+@import 'sidebar.css';
+
+.dashboard-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: 1fr;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--on-surface);
+  transition: grid-template-columns var(--transition-base);
+}
+
+.dashboard-shell.sidebar-collapsed {
+  grid-template-columns: var(--sidebar-collapsed-width) 1fr;
+}
+
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+}
+
+.main-area {
+  display: grid;
+  grid-template-rows: var(--topbar-height) 1fr;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Topbar --- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--space-6);
+  height: var(--topbar-height);
+  border-bottom: 1px solid var(--outline);
+  background: var(--surface-container-lowest);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-left, .topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.topbar-right {
+  gap: var(--space-3);
+}
+
+.topbar-search {
+  position: relative;
+  width: 240px;
+}
+
+.topbar-search span {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--on-surface-variant);
+}
+
+.topbar-search input {
+  width: 100%;
+  height: 36px;
+  padding: 0 16px 0 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--outline);
+  background: var(--surface-container);
+  font-size: var(--text-sm);
+  color: var(--on-surface);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.topbar-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface-container-high);
+}
+
+.content-area {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-4) var(--space-5);
+  scroll-behavior: smooth;
+}
+
+/* --- Page Grid --- */
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-3);
+  align-items: stretch;
+}
+
+/* Cards inside grid columns should fill the full cell height */
+.page-grid > [class*="col-"] > .card-base,
+.page-grid > [class*="col-"] > .card-glass {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Grid Columns Utility */
+.col-12 { grid-column: span 12; }
+.col-8 { grid-column: span 8; }
+.col-6 { grid-column: span 6; }
+.col-4 { grid-column: span 4; }
+.col-3 { grid-column: span 3; }
+
+/* Grid Row Utility */
+.row-2 { grid-row: span 2; }
+.row-3 { grid-row: span 3; }
+
+/* Section Header Spacing */
+.section-header {
+  margin-bottom: var(--space-3);
+}
+
+/* Specific Layouts */
+.layout-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.layout-main-content {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--space-6);
+}
